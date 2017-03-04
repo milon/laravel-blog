@@ -17,7 +17,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password'
     ];
 
     /**
@@ -29,6 +31,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            if(empty($user->api_token)) {
+                $user->api_token = str_random(50);
+            }
+        });
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -37,5 +50,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->where('is_admin', true);
     }
 }

@@ -13,7 +13,8 @@ class Post extends Model
         'title',
         'body',
         'user_id',
-        'category_id'
+        'category_id',
+        'is_published'
     ];
 
     public function category()
@@ -29,5 +30,15 @@ class Post extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
+    }
+
+    public function scopeDrafted($query)
+    {
+        return $query->where('is_published', false);
     }
 }
