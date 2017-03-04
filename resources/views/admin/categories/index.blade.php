@@ -8,9 +8,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2>
-                            Posts
+                            Categories
 
-                            <a href="{{ url('admin/posts/create') }}" class="btn btn-default pull-right">Create New</a>
+                            <a href="{{ url('admin/categories/create') }}" class="btn btn-default pull-right">Create New</a>
                         </h2>
                     </div>
 
@@ -18,33 +18,29 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Body</th>
-                                    <th>Author</th>
-                                    <th>Published</th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($posts))
-                                    @foreach ($posts as $post)
+                                @if (count($categories))
+                                    @foreach ($categories as $category)
                                         <tr>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ str_limit($post->body, 60) }}</td>
-                                            <td>{{ $post->user->name }}</td>
-                                            <td>{{ $post->published }}</td>
-                                            <td></td>
+                                            <td>{{ $category->name }}</td>
+                                            <td>
+                                                <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @else
                                     <tr>
-                                        <td colspan="5">No post available.</td>
+                                        <td colspan="2">No category available.</td>
                                     </tr>
                                 @endif
                             </tbody>
                         </table>
 
-                        {!! $posts->links() !!}
+                        {!! $categories->links() !!}
 
                     </div>
                 </div>
