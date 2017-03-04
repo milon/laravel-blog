@@ -17,6 +17,15 @@ class Post extends Model
         'is_published'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($post) {
+            $post->user_id = auth()->user()->id;
+        });
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
