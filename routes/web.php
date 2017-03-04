@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+    Route::resource('/posts', 'PostController');
+    Route::resource('/categories', 'CategoryController');
+    Route::resource('/tags', 'TagController');
+    Route::resource('/comments', 'CommentController');
+    Route::resource('/users', 'UserController');
+});
