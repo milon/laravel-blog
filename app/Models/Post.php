@@ -41,4 +41,9 @@ class Post extends Model
     {
         return $query->where('is_published', false);
     }
+
+    public function getPublishedAttribute()
+    {
+        return ($this->is_published) ? 'Yes' : 'No';
+    }
 }
