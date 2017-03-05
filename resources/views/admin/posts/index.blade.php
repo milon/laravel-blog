@@ -26,21 +26,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($posts))
-                                    @foreach ($posts as $post)
-                                        <tr>
-                                            <td>{{ $post->title }}</td>
-                                            <td>{{ str_limit($post->body, 60) }}</td>
-                                            <td>{{ $post->user->name }}</td>
-                                            <td>{{ $post->published }}</td>
-                                            <td></td>
-                                        </tr>
-                                    @endforeach
-                                @else
+                                @forelse ($posts as $post)
+                                    <tr>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ str_limit($post->body, 60) }}</td>
+                                        <td>{{ $post->user->name }}</td>
+                                        <td>{{ $post->published }}</td>
+                                        <td></td>
+                                    </tr>
+                                @empty
                                     <tr>
                                         <td colspan="5">No post available.</td>
                                     </tr>
-                                @endif
+                                @endforelse
                             </tbody>
                         </table>
 

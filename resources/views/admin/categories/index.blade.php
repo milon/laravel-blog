@@ -23,20 +23,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (count($categories))
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <td>{{ $category->name }}</td>
-                                            <td>
-                                                <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @else
+                                @forelse ($categories as $category)
+                                    <tr>
+                                        <td>{{ $category->name }}</td>
+                                        <td>
+                                            <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
+                                        </td>
+                                    </tr>
+                                @empty
                                     <tr>
                                         <td colspan="2">No category available.</td>
                                     </tr>
-                                @endif
+                                @endforelse 
                             </tbody>
                         </table>
 
