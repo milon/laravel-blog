@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::paginate(10);
+
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -24,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -35,18 +38,12 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this->validate($request, ['name' => 'required']);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        Tag::create(['name' => $request->name]);
+        flash()->overlay('Tag created successfully.');
+
+        return redirect('/admin/tags');
     }
 
     /**
@@ -55,9 +52,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -67,9 +64,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+
+        $tag->update($request->all());
+        flash()->overlay('Tag updated successfully.');
+
+        return redirect('/admin/tags');
     }
 
     /**
@@ -78,8 +80,11 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        flash()->overlay('Tag deleted successfully.');
+
+        return redirect('/admin/tags');
     }
 }
