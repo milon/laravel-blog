@@ -15,10 +15,9 @@
                     </div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/admin/categories') }}">
-                            {{ csrf_field() }}
+                        {!! Form::open(['url' => '/admin/categories', 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
-                            @include('admin.categories._form');
+                            @include('admin.categories._form')
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-2">
@@ -28,7 +27,7 @@
                                 </div>
                             </div>
 
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
