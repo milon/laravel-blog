@@ -21,9 +21,9 @@ Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::resource('/posts', 'PostController');
-    Route::put('/posts/{post}/publish', 'PostController@publish');
+    Route::put('/posts/{post}/publish', 'PostController@publish')->middleware('admin');
     Route::resource('/categories', 'CategoryController', ['except' => ['show']]);
     Route::resource('/tags', 'TagController');
     Route::resource('/comments', 'CommentController');
-    Route::resource('/users', 'UserController');
+    Route::resource('/users', 'UserController')->middleware('admin');
 });
