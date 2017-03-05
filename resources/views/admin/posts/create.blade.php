@@ -69,10 +69,10 @@
                                 <label for="tags" class="col-md-2 control-label">Tags</label>
 
                                 <div class="col-md-8">
-                                    <select class="form-control" name="tags[]" multiple>
+                                    <select class="form-control select2" name="tags[]" multiple>
                                         <option value="">Select Tags</option>
-                                        @foreach ($categories as $id => $category)
-                                            <option value="{{ $id }}">{{ $category }}</option>
+                                        @foreach ($tags as $id => $tag)
+                                            <option value="{{ $id }}">{{ $tag }}</option>
                                         @endforeach
                                     </select>
 
