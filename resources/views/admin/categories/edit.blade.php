@@ -17,7 +17,7 @@
                     <div class="panel-body">
                         {!! Form::model($category, ['method' => 'PUT', 'url' => "/admin/categories/{$category->id}", 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
-                            @include('admin.categories._form');
+                            @include('admin.categories._form')
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-2">

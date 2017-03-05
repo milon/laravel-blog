@@ -10310,6 +10310,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 __WEBPACK_IMPORTED_MODULE_0_jquery___default()('.select2').select2();
+__WEBPACK_IMPORTED_MODULE_0_jquery___default()('.select2-tags').select2({ tags: true });
+__WEBPACK_IMPORTED_MODULE_0_jquery___default()('#flash-overlay-modal').modal();
+
+var laravel = {
+  initialize: function initialize() {
+    this.methodLinks = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('a[data-method]');
+    this.token = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('a[data-token]');
+    this.registerEvents();
+  },
+
+  registerEvents: function registerEvents() {
+    this.methodLinks.on('click', this.handleMethod);
+  },
+
+  handleMethod: function handleMethod(e) {
+    var link = __WEBPACK_IMPORTED_MODULE_0_jquery___default()(this);
+    var httpMethod = link.data('method').toUpperCase();
+    var form;
+
+    // If the data-method attribute is not PUT or DELETE,
+    // then we don't know what to do. Just ignore.
+    if (__WEBPACK_IMPORTED_MODULE_0_jquery___default.a.inArray(httpMethod, ['PUT', 'DELETE']) === -1) {
+      return;
+    }
+
+    // Allow user to optionally provide data-confirm="Are you sure?"
+    if (link.data('confirm')) {
+      if (!laravel.verifyConfirm(link)) {
+        return false;
+      }
+    }
+
+    form = laravel.createForm(link);
+    form.submit();
+
+    e.preventDefault();
+  },
+
+  verifyConfirm: function verifyConfirm(link) {
+    return confirm(link.data('confirm'));
+  },
+
+  createForm: function createForm(link) {
+    var form = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('<form>', {
+      'method': 'POST',
+      'action': link.attr('href')
+    });
+
+    var token = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('<input>', {
+      'type': 'hidden',
+      'name': '_token',
+      'value': link.data('token')
+    });
+
+    var hiddenInput = __WEBPACK_IMPORTED_MODULE_0_jquery___default()('<input>', {
+      'name': '_method',
+      'type': 'hidden',
+      'value': link.data('method')
+    });
+
+    return form.append(token, hiddenInput).appendTo('body');
+  }
+};
+
+laravel.initialize();
 
 /***/ }),
 /* 2 */
