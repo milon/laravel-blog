@@ -15,9 +15,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url("/admin/categories/{$category->id}") }}">
-                            {{ method_field('PUT') }}
-                            {{ csrf_field() }}
+                        {!! Form::model($category, ['method' => 'PUT', 'url' => "/admin/categories/{$category->id}", 'class' => 'form-horizontal', 'role' => 'form']) !!}
 
                             @include('admin.categories._form');
 
@@ -29,7 +27,7 @@
                                 </div>
                             </div>
 
-                        </form>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

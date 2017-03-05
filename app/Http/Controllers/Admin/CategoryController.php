@@ -63,9 +63,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request, ['name' => 'required']);
+
+        $category->update($request->all());
+
+        return redirect('/admin/categories');
     }
 
     /**
@@ -74,8 +78,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect('/admin/categories');
     }
 }
