@@ -25,5 +25,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::resource('/categories', 'CategoryController', ['except' => ['show']]);
     Route::resource('/tags', 'TagController');
     Route::resource('/comments', 'CommentController');
-    Route::resource('/users', 'UserController')->middleware('admin');
+    Route::resource('/users', 'UserController', ['middleware' => 'admin', 'only' => ['index', 'destroy']]);
 });
