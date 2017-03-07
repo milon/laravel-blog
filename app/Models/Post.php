@@ -23,7 +23,7 @@ class Post extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            $post->user_id = auth()->user()->id;
+            $post->user_id = auth()->user()->id ?? 1;   // by default user id 1
         });
     }
 
@@ -39,7 +39,7 @@ class Post extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
     public function comments()
