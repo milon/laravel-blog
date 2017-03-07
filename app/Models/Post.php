@@ -25,6 +25,11 @@ class Post extends Model
         static::creating(function ($post) {
             $post->user_id = auth()->user()->id ?? 1;   // by default user id 1
         });
+
+        static::deleting(function ($post) {
+            $post->comment()->delete();
+            $post->tags()->detach();
+        });
     }
 
     public function category()
