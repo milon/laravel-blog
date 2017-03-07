@@ -8,7 +8,7 @@
                 @forelse ($posts as $post)
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            {{ $post->title }}
+                            {{ $post->title }} - <small>by {{ $post->user->name }}</small>
 
                             <span class="pull-right">
                                 @forelse ($post->tags as $tag)
@@ -22,9 +22,10 @@
                         <div class="panel-body">
                             <p>{{ str_limit($post->body, 200) }}</p>
                             <p>
-                                <span class="btn btn-default">{{ $post->category->name }}</span>
+                                <span class="btn btn-sm btn-success">{{ $post->category->name }}</span>
+                                <span class="btn btn-sm btn-info">{{ $post->comments_count }} comments</span>
 
-                                <a href="{{ url("/posts/{$post->id}") }}" class="btn btn-primary">See more</a>
+                                <a href="{{ url("/posts/{$post->id}") }}" class="btn btn-sm btn-primary">See more</a>
                             </p>
                         </div>
                     </div>
