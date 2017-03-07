@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                @include('frontend._form')
+                @includeWhen(Auth::user(), 'frontend._form')
 
                 @include('frontend._comments')
 
