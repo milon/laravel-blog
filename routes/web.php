@@ -13,12 +13,13 @@
 
 Route::get('/', 'BlogController@index');
 Route::get('/posts/{post}', 'BlogController@post');
+Route::post('/posts/{post}/comment', 'BlogController@comment')->middleware('auth');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function() {
     Route::resource('/posts', 'PostController');
     Route::put('/posts/{post}/publish', 'PostController@publish')->middleware('admin');
     Route::resource('/categories', 'CategoryController', ['except' => ['show']]);

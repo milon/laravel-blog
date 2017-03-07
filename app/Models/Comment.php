@@ -14,6 +14,15 @@ class Comment extends Model
         'post_id'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($comment) {
+            $comment->user_id = auth()->user()->id;
+        });
+    }
+
     public function post()
     {
         return $this->belongsTo(Post::class);
