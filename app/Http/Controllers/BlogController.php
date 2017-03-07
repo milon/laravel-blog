@@ -11,6 +11,7 @@ class BlogController extends Controller
     {
         $posts = Post::with('tags', 'category', 'user')
                     ->withCount('comments')
+                    ->published()
                     ->simplePaginate(5);
 
         return view('frontend.index', compact('posts'));

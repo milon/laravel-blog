@@ -81,6 +81,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+            flash()->overlay("You can't edit other peoples post.");
+            return redirect('/admin/posts');
+        }
+
         $categories = Category::pluck('name', 'id')->all();
         $tags = Tag::pluck('name', 'name')->all();
 

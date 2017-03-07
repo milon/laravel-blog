@@ -19,6 +19,7 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Post Count</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -26,6 +27,7 @@
                                 @forelse ($categories as $category)
                                     <tr>
                                         <td>{{ $category->name }}</td>
+                                        <td>{{ $category->posts_count }}</td>
                                         <td>
                                             <a href="{{ url("/admin/categories/{$category->id}/edit") }}" class="btn btn-xs btn-info">Edit</a>
                                             <a href="{{ url("/admin/categories/{$category->id}") }}" data-method="DELETE" data-token="{{ csrf_token() }}" data-confirm="Are you sure?" class="btn btn-xs btn-danger">Delete</a>

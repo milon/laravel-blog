@@ -40,6 +40,11 @@ class User extends Authenticatable
                 $user->api_token = str_random(50);
             }
         });
+
+        static::deleting(function ($user) {
+            $user->posts()->delete();
+            $user->comments()->delete();
+        });
     }
 
     public function posts()
