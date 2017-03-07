@@ -120,6 +120,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+            flash()->overlay("You can't delete other peoples post.");
+            return redirect('/admin/posts');
+        }
+
         $post->delete();
         flash()->overlay('Post deleted successfully.');
 
