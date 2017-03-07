@@ -11,19 +11,23 @@
                             {{ $post->title }} - <small>by {{ $post->user->name }}</small>
 
                             <span class="pull-right">
-                                @forelse ($post->tags as $tag)
-                                    <span class="label label-default">{{ $tag->name }}</span>
-                                @empty
-                                    <span class="label label-danger">No tag found.</span>
-                                @endforelse
+                                {{ $post->created_at->toDayDateTimeString() }}
                             </span>
                         </div>
 
                         <div class="panel-body">
                             <p>{{ str_limit($post->body, 200) }}</p>
                             <p>
+                                Tags:
+                                @forelse ($post->tags as $tag)
+                                    <span class="label label-default">{{ $tag->name }}</span>
+                                @empty
+                                    <span class="label label-danger">No tag found.</span>
+                                @endforelse
+                            </p>
+                            <p>
                                 <span class="btn btn-sm btn-success">{{ $post->category->name }}</span>
-                                <span class="btn btn-sm btn-info">{{ $post->comments_count }} comments</span>
+                                <span class="btn btn-sm btn-info">Comments <span class="badge">{{ $post->comments_count }}</span></span>
 
                                 <a href="{{ url("/posts/{$post->id}") }}" class="btn btn-sm btn-primary">See more</a>
                             </p>
