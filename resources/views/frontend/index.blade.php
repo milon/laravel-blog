@@ -47,7 +47,7 @@
                 @endforelse
 
                 <div align="center">
-                    {!! $posts->links() !!}
+                    {!! $posts->appends(['search' => request()->get('search')])->links() !!}
                 </div>
 
             </div>

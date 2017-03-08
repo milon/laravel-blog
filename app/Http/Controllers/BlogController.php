@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with('tags', 'category', 'user')
+        $posts = Post::when($request->search, function($query) use($request) {
+                        $search = $request->search;
+                        
+                        return $query->where('title', 'like', "%$search%")
+                            ->orWhere('body', 'like', "%$search%");
+                    })->with('tags', 'category', 'user')
                     ->withCount('comments')
                     ->published()
                     ->simplePaginate(5);
