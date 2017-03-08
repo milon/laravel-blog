@@ -17,6 +17,10 @@ class AdminMiddleware
     public function handle($request, Closure $next)
     {
         if(! Auth::user()->is_admin) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Unauthenticated. You are not an admin.'], 401);
+            }
+
             abort(403, "You're not admin, you don't have the permission.");
         }
 
