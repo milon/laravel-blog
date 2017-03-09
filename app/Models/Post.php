@@ -23,7 +23,9 @@ class Post extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            $post->user_id = auth()->user()->id ?? 1;   // by default user id 1
+            if(is_null($post->user_id)) {
+                $post->user_id = auth()->user()->id;
+            }
         });
 
         static::deleting(function ($post) {

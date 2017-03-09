@@ -19,7 +19,9 @@ class Comment extends Model
         parent::boot();
 
         static::creating(function ($comment) {
-            $comment->user_id = auth()->user()->id;
+            if(is_null($comment->user_id)) {
+                $comment->user_id = auth()->user()->id;
+            }
         });
     }
 
