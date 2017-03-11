@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +34,11 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email', $request->email)->first();
-        $user->reset_key = rand(1000, 9999);
+        $user->reset_key = rand(10000, 99999);
         $user->save();
 
-        Mail::raw("Your Password Reset Key is: {$user->reset_key} \n\n--\Laravel Blog Team", function ($message) use ($user) {
-            $message->from('no-reply@castro.com', 'Castro Team');
+        Mail::raw("Your Password Reset Key is: {$user->reset_key} \n\n--\nLaravel Blog Team", function ($message) use ($user) {
+            $message->from('no-reply@laravel-blog.com', 'Castro Team');
             $message->subject('Password Reset Key of Castro');
             $message->to($user->email);
         });
