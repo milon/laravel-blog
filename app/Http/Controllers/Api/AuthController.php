@@ -50,4 +50,36 @@ class AuthController extends Controller
         ]);
     }
 
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'email'     => 'required|email|exists:users',
+            'reset_key' => 'required',
+            'password'  => 'required',
+        ]);
+
+        $user = User::where([
+                ['reset_key', $request->reset_key],
+                ['email', $request->email],
+            ])->first();
+
+        if (!$user) {
+            return response()->json([
+                'data' => [
+                    'message' => 'Email and Reset Key does not match.'
+                ]
+            ], 422);
+        }
+
+        $user->reset_key = null;
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return response()->json([
+            'data' => [
+                'message' => 'Password changed successfully.'
+            ]
+        ]);
+    }
+
 }
