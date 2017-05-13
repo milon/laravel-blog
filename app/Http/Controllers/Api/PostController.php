@@ -10,13 +10,15 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        return Post::when($request->title, function($query) use ($request) {
+        $limit = $request->get('limit', 10);
+
+        $post = Post::when($request->title, function($query) use ($request) {
             return $query->where('title', 'like', "%{$request->title}%");
         })
         ->when($request->search, function($query) use ($request) {
             return $query->where('title', 'like', "%{$request->search}%")
                          ->orWhere('body', 'like', "%{$request->search}%");
-        })->paginate(10);
+        })->paginate($limit);
     }
 
     public function show(Post $post)
