@@ -10,9 +10,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $limit = $request->get('limit', 10);
-
-        $post = Post::when($request->title, function($query) use ($request) {
+        return Post::when($request->title, function($query) use ($request) {
             return $query->where('title', 'like', "%{$request->title}%");
         })
         ->when($request->search, function($query) use ($request) {
@@ -27,7 +25,13 @@ class PostController extends Controller
         }, function($query) {
             return $query->latest();
         })
-        ->paginate($limit);
+        ->when($request->status, function($query) use ($request) {
+            if($query->status == 'published') {
+                return $query->published();
+            }
+            return $query->drafted();
+        })
+        ->paginate($request->get('limit', 10));
     }
 
     public function show(Post $post)
