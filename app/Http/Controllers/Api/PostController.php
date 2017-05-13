@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Post;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::paginate(10);
-
-        return $posts;
+        return Post::when($request->title, function($query) use ($request) {
+            return $query->where('title', 'like', "%{$request->title}%");
+        })->paginate(10);
     }
 
     public function show(Post $post)
