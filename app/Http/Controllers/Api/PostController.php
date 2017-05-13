@@ -18,7 +18,16 @@ class PostController extends Controller
         ->when($request->search, function($query) use ($request) {
             return $query->where('title', 'like', "%{$request->search}%")
                          ->orWhere('body', 'like', "%{$request->search}%");
-        })->paginate($limit);
+        })
+        ->when($request->order, function($query) use ($request) {
+            if($request->order == 'oldest') {
+                return $query->oldest();
+            }
+            return $query->latest();
+        }, function($query) {
+            return $query->latest();
+        })
+        ->paginate($limit);
     }
 
     public function show(Post $post)
