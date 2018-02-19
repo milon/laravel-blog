@@ -32,7 +32,7 @@ php artisan db:seed --class=DummyDataSeeder
 
 ## API Endpoints
 
-This projects exposes some API endpoints. You could request those endpoints with the `api_key` passed as query parameters, like this- `/api/tags?api_key=YOUR_API_KEY`. The API key could be obtained from `/api/auth/token` endpoint. Available endpoints are-
+This projects exposes some API endpoints. You could request those endpoints with the `api_token` passed as query parameters, like this- `/api/tags?api_token=YOUR_API_KEY`. The API key could be obtained from `/api/auth/token` endpoint. Available endpoints are-
 
 ```
 /api/auth/token
