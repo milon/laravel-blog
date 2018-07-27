@@ -12,6 +12,15 @@ A simple blog for demonstration purpose. Based on Laravel 5.4
 - Tokenizer PHP Extension
 - XML PHP Extension
 
+## Demo
+
+You can try the live demo : [http://gentle-everglades-40337.herokuapp.com/](http://gentle-everglades-40337.herokuapp.com/)
+
+## Demo login info
+
+user: contact@milon.im | password: password
+
+
 ## Installation
 
 ```
