@@ -48,10 +48,10 @@ This projects exposes some API endpoints. You could request those endpoints with
 /api/auth/reset-password
 /api/auth/change-password
 
-/api/auth/tags
-/api/auth/categories
-/api/auth/users     // only accessible by admin
-/api/auth/posts
+/api/tags
+/api/categories
+/api/users     // only accessible by admin
+/api/posts
 ```
 
 ## Author
