@@ -1,10 +1,10 @@
 # Laravel Blog
 
-A simple blog for demonstration purpose. Based on Laravel 5.4
+A simple blog for demonstration purpose. Based on Laravel 5.5
 
 ## Requirements
 
-- Laravel 5.4
+- Laravel 5.5
 - PHP >= 5.6.4
 - OpenSSL PHP Extension
 - PDO PHP Extension
