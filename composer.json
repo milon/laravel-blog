@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "laracasts/flash": "^2.0",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4"
     },
