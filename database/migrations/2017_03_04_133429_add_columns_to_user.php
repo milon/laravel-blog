@@ -14,7 +14,7 @@ class AddColumnsToUser extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('api_token', 50);
+            $table->string('api_token', 50)->nullable();
             $table->boolean('is_admin')->default(false);
             $table->string('reset_key', 10)->nullable();
         });
