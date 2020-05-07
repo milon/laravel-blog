@@ -1,11 +1,11 @@
 # Laravel Blog
 
-A simple blog for demonstration purpose. Based on Laravel 5.8
+A simple blog for demonstration purpose. Based on Laravel 7.0
 
 ## Requirements
 
-- Laravel 5.8
-- PHP >= 7.1.3
+- Laravel 7.0
+- PHP >= 7.2.5
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension
