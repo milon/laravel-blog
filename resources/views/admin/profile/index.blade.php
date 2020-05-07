@@ -41,6 +41,14 @@
                                     <td>API Token</td>
                                     <td>{{ $user->api_token }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Number of Posts</td>
+                                    <td>{{ $user->posts_count }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Comments</td>
+                                    <td>{{ $user->comments_count }}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
