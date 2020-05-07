@@ -16,6 +16,7 @@ Route::get('/posts/{post}', 'BlogController@post');
 Route::post('/posts/{post}/comment', 'BlogController@comment')->middleware('auth');
 
 Auth::routes();
+Route::get('/profile', 'Auth\\ProfileController@index')->middleware('auth');
 
 Route::get('/home', 'HomeController@index');
 
