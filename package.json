@@ -10,7 +10,7 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
-    "jquery": "^3.1.1",
+    "jquery": "^3.5.0",
     "laravel-mix": "^0.8.8",
     "lodash": "^4.17.13",
     "select2": "^4.0.3",
