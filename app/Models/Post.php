@@ -68,4 +68,9 @@ class Post extends Model
     {
         return ($this->is_published) ? 'Yes' : 'No';
     }
+
+    public function getEtagAttribute()
+    {
+        return hash('sha256', "product-{$this->id}-{$this->updated_at}");
+    }
 }

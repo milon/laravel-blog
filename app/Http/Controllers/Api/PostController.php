@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -39,6 +40,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        Cache::put($post->etag, $post->id);
+
         $post = $post->load(['category', 'comments.user', 'tags', 'user']);
 
         return new PostResource($post);

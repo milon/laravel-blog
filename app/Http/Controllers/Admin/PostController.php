@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
@@ -101,6 +102,9 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post)
     {
+        // disbust cache
+        Cache::forget($post->etag);
+
         $post->update([
             'title'       => $request->title,
             'body'        => $request->body,
