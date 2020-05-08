@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Http\Resources;
+
+use App\Http\Resources\TagResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\CategoryResource;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class PostResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id'           => $this->id,
+            'title'        => $this->title,
+            'body'         => $this->body,
+            'is_published' => (boolean) $this->is_published,
+            'created_at'   => $this->created_at->format('d-m-Y H:i'),
+            'updated_at'   => $this->updated_at->format('d-m-Y H:i'),
+            'comments'     => CommentResource::collection($this->whenLoaded('comments')),
+            'category'     => new CategoryResource($this->whenLoaded('category')),
+            'user'         => new UserResource($this->whenLoaded('user')),
+            'tags'         => TagResource::collection($this->whenLoaded('tags')),
+        ];
+    }
+}

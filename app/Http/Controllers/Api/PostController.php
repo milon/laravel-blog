@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostResource;
 use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        return Post::when($request->title, function($query) use ($request) {
+        $posts = Post::when($request->title, function($query) use ($request) {
             return $query->where('title', 'like', "%{$request->title}%");
         })
         ->when($request->search, function($query) use ($request) {
@@ -32,12 +33,14 @@ class PostController extends Controller
             return $query->drafted();
         })
         ->paginate($request->get('limit', 10));
+
+        return PostResource::collection($posts);
     }
 
     public function show(Post $post)
     {
         $post = $post->load(['category', 'comments.user', 'tags', 'user']);
 
-        return $post;
+        return new PostResource($post);
     }
 }

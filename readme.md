@@ -44,7 +44,7 @@ php artisan db:seed --class=DummyDataSeeder
 
 ## API Endpoints
 
-This projects exposes some API endpoints. You could request those endpoints with the `api_token` passed as query parameters, like this- `/api/tags?api_token=YOUR_API_KEY`. The API key could be obtained from `/api/auth/token` endpoint. Available endpoints are-
+This projects exposes some API endpoints. You could request those endpoints with the `api_token` passed as query parameters, like this- `/api/tags?api_token=YOUR_API_KEY`. You can also pass the token as a Authorization Bearer token. The API key could be obtained from `/api/auth/token` endpoint. Available endpoints are-
 
 ```
 /api/auth/token
@@ -56,6 +56,8 @@ This projects exposes some API endpoints. You could request those endpoints with
 /api/users     // only accessible by admin
 /api/posts
 ```
+
+These endpoints are also available as a [Postman](https://www.postman.com/) collection [here](./Laravel-Blog.postman_collection.json).
 
 ## Author
 
