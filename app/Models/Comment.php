@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\User;
 use App\Models\Post;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -11,7 +11,7 @@ class Comment extends Model
     protected $fillable = [
         'body',
         'user_id',
-        'post_id'
+        'post_id',
     ];
 
     protected static function boot()
@@ -19,7 +19,7 @@ class Comment extends Model
         parent::boot();
 
         static::creating(function ($comment) {
-            if(is_null($comment->user_id)) {
+            if (is_null($comment->user_id)) {
                 $comment->user_id = auth()->user()->id;
             }
         });

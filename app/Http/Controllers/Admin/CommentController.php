@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -28,8 +28,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        if($comment->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+        if ($comment->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
             flash()->overlay("You can't delete other peoples comment.");
+
             return redirect('/admin/posts');
         }
 

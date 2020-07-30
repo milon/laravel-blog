@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\User;
-use App\Models\Tag;
-use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Tag;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -15,7 +15,7 @@ class Post extends Model
         'body',
         'user_id',
         'category_id',
-        'is_published'
+        'is_published',
     ];
 
     protected static function boot()
@@ -23,7 +23,7 @@ class Post extends Model
         parent::boot();
 
         static::creating(function ($post) {
-            if(is_null($post->user_id)) {
+            if (is_null($post->user_id)) {
                 $post->user_id = auth()->user()->id;
             }
         });

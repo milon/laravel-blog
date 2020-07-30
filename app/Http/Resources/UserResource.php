@@ -19,7 +19,7 @@ class UserResource extends JsonResource
             'email'      => $this->email,
             'created_at' => $this->created_at->format('d-m-Y H:i'),
             'api_token'  => $this->api_token,
-            'is_admin'   => (boolean) $this->is_admin,
+            'is_admin'   => (bool) $this->is_admin,
         ];
     }
 }

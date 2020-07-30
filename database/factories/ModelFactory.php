@@ -1,11 +1,11 @@
 <?php
 
-use App\User;
-use App\Models\Tag;
-use App\Models\Post;
-use Faker\Generator;
-use App\Models\Comment;
 use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\Tag;
+use App\User;
+use Faker\Generator;
 
 $factory->define(User::class, function (Generator $faker) {
     static $password;
@@ -24,19 +24,19 @@ $factory->define(Post::class, function (Generator $faker) {
         'body'         => $faker->paragraph(30),
         'user_id'      => rand(1, 10),
         'category_id'  => rand(1, 10),
-        'is_published' => rand(0, 1)
+        'is_published' => rand(0, 1),
     ];
 });
 
 $factory->define(Category::class, function (Generator $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });
 
 $factory->define(Tag::class, function (Generator $faker) {
     return [
-        'name' => $faker->word
+        'name' => $faker->word,
     ];
 });
 
@@ -44,6 +44,6 @@ $factory->define(Comment::class, function (Generator $faker) {
     return [
         'user_id' => rand(1, 10),
         'post_id' => rand(1, 25),
-        'body'    => $faker->paragraph
+        'body'    => $faker->paragraph,
     ];
 });

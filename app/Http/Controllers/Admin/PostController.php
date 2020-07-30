@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Tag;
-use App\Models\Post;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
@@ -48,10 +48,10 @@ class PostController extends Controller
         $post = Post::create([
             'title'       => $request->title,
             'body'        => $request->body,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
         ]);
 
-        $tagsId = collect($request->tags)->map(function($tag) {
+        $tagsId = collect($request->tags)->map(function ($tag) {
             return Tag::firstOrCreate(['name' => $tag])->id;
         });
 
@@ -82,8 +82,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+        if ($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
             flash()->overlay("You can't edit other peoples post.");
+
             return redirect('/admin/posts');
         }
 
@@ -108,10 +109,10 @@ class PostController extends Controller
         $post->update([
             'title'       => $request->title,
             'body'        => $request->body,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
         ]);
 
-        $tagsId = collect($request->tags)->map(function($tag) {
+        $tagsId = collect($request->tags)->map(function ($tag) {
             return Tag::firstOrCreate(['name' => $tag])->id;
         });
 
@@ -129,8 +130,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
+        if ($post->user_id != auth()->user()->id && auth()->user()->is_admin == false) {
             flash()->overlay("You can't delete other peoples post.");
+
             return redirect('/admin/posts');
         }
 
@@ -142,7 +144,7 @@ class PostController extends Controller
 
     public function publish(Post $post)
     {
-        $post->is_published = !$post->is_published;
+        $post->is_published = ! $post->is_published;
         $post->save();
         flash()->overlay('Post changed successfully.');
 

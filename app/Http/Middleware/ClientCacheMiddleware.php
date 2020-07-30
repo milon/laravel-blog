@@ -16,8 +16,8 @@ class ClientCacheMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if($etag = $request->header('If-None-Match')) {
-            if(Cache::get($etag)) {
+        if ($etag = $request->header('If-None-Match')) {
+            if (Cache::get($etag)) {
                 return response(null, 304);
             }
         }

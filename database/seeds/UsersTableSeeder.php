@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\User;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'name'     => 'Nuruzzaman Milon',
             'email'    => 'contact@milon.im',
             'password' => bcrypt('password'),
-            'is_admin' => true
+            'is_admin' => true,
         ]);
     }
 }

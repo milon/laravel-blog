@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -28,7 +28,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        if(auth()->user() == $user) {
+        if (auth()->user() == $user) {
             flash()->overlay("You can't delete yourself.");
 
             return redirect('/admin/users');

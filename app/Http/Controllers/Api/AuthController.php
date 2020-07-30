@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         $this->validate($request, [
             'email'    => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -24,7 +24,7 @@ class AuthController extends Controller
 
         return response()->json([
             'error' => true,
-            'message' => 'Wrong credentials!'
+            'message' => 'Wrong credentials!',
         ])->setStatusCode(401);
     }
 
@@ -64,11 +64,11 @@ class AuthController extends Controller
                 ['email', $request->email],
             ])->first();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json([
                 'data' => [
-                    'message' => 'Email and Reset Key does not match.'
-                ]
+                    'message' => 'Email and Reset Key does not match.',
+                ],
             ], 422);
         }
 
@@ -78,9 +78,8 @@ class AuthController extends Controller
 
         return response()->json([
             'data' => [
-                'message' => 'Password changed successfully.'
-            ]
+                'message' => 'Password changed successfully.',
+            ],
         ]);
     }
-
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\CommentResource;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\UserResource;
-use App\Http\Resources\CommentResource;
-use App\Http\Resources\CategoryResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'id'           => $this->id,
             'title'        => $this->title,
             'body'         => $this->body,
-            'is_published' => (boolean) $this->is_published,
+            'is_published' => (bool) $this->is_published,
             'created_at'   => $this->created_at->format('d-m-Y H:i'),
             'updated_at'   => $this->updated_at->format('d-m-Y H:i'),
             'comments'     => CommentResource::collection($this->whenLoaded('comments')),
