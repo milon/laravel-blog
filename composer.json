@@ -17,10 +17,11 @@
         "nunomaduro/collision": "^4.1"
     },
     "require-dev": {
+        "filp/whoops": "~2.0",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "^8.5",
-        "filp/whoops": "~2.0"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "classmap": [
